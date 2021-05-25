@@ -1,0 +1,30 @@
+version: '3.7'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: dockerfile
+      target: development
+    ports:
+      - "8080:8080"
+    volumes:
+      - "./:/app"
+    security_opt:
+      - seccomp:unconfined
+    depends_on: 
+      - db
+    environment:
+      DB_PORT: 3306
+      DB_NAME: sample_pj
+      DB_USER: root
+      DB_PASSWORD: password
+  db:
+    image: mysql:latest
+    environment:
+      MYSQL_DATABASE: sample_pj
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./data/mysql:/var/lib/mysql:cached
+      - ./db/my.cnf:/etc/mysql/conf.d/my.cnf
