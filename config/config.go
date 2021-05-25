@@ -19,7 +19,7 @@ type Config struct{
 type Db struct {
 	Port string `env:"DB_PORT"`
 	Name string `env:"DB_NAME"`
-	User string `env:DB_USER`
+	User string `env:"DB_USER"`
 	Password string `env:"DB_PASSWORD"`
 }
 
@@ -34,7 +34,7 @@ func init() {
 	once.Do(func(){
 		config = &Config{}
 		goenv := os.Getenv("GO_ENV")
-		filepath := fmt.Sprintf("./config.go/%v.yml", goenv)
+		filepath := fmt.Sprintf("./config/%v.yml", goenv)
 		buf, err := ioutil.ReadFile(filepath)
 		if err != nil {
 			log.Fatalln("failed to load config yaml err:", err)

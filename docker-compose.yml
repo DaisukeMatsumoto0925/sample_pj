@@ -3,7 +3,7 @@ services:
   app:
     build:
       context: .
-      dockerfile: dockerfile
+      dockerfile: Dockerfile
       target: development
     ports:
       - "8080:8080"
@@ -11,7 +11,7 @@ services:
       - "./:/app"
     security_opt:
       - seccomp:unconfined
-    depends_on: 
+    depends_on:
       - db
     environment:
       DB_PORT: 3306
@@ -19,7 +19,8 @@ services:
       DB_USER: root
       DB_PASSWORD: password
   db:
-    image: mysql:latest
+    platform: linux/x86_64 #for m1Tip
+    image: mysql:8.0.25
     environment:
       MYSQL_DATABASE: sample_pj
       MYSQL_ROOT_PASSWORD: password

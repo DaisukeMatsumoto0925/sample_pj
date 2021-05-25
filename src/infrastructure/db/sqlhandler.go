@@ -6,6 +6,7 @@ import (
 
 	"github.com/DaisukeMatsumoto0925/sample_pj/config"
 	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
 type SQLHandler struct {
@@ -37,5 +38,4 @@ func genConnectString() string {
 	QUERY := "?charset=utf8mb4&parseTime=True&loc=Local"
 
 	return USER + ":" + PASSWORD + "@" + PROTOCOL + "/" + DBNAME + QUERY
-
 }
